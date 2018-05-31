@@ -1,10 +1,36 @@
 Tweet index
-<% @array.each do |t|%> 
+<!-- <% @array.each do |t|%> 
 	<p><%= t%></p>
-<%end%>
+<%end%> -->
 <script type="text/javascript" charset="utf-8">
 	function init() {
-
+		$(document).ready(function() {
+			$.ajax({
+				url: "<%= tweet_index_path %>", // Route to the Script Controller method
+				type: "GET",
+				data: {
+						search: "Euro"
+				},
+				dataType: "json", // This goes to Controller in params hash, i.e. params[:file_name]
+				complete: function() {
+				},
+				success: function(data, textStatus, xhr) {
+						for (var key in data){
+								if(data[key].coordinates != null) {
+									console.log(data[key]);
+								} else {
+									console.log(data[key]);
+								}
+						}
+						console.log("Terminó");
+						// polis.push(coords);
+						// initMap(polis);
+				},
+				error: function() {
+							alert("Ocurrió un error en el servidor");
+				}
+			});
+		});
 	}
 </script>
 <script async defer

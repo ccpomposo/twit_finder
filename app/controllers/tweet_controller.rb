@@ -11,7 +11,7 @@ class TweetController < ApplicationController
         }
         if search 
             client = Twitter::REST::Client.new(config)
-            tweets = client.search(search.to_s, result_type: "recent").take(100)
+            tweets = client.search(search.to_s, result_type: "recent").take(10)
             @array = tweets.map{ |t| t.to_json if t.to_json["coordinates"] != "null"}.compact
             # @array.each do |tweet|
             #     puts tweet.text
