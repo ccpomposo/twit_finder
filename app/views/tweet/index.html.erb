@@ -31,19 +31,19 @@ Tweet index
         };
         map = new google.maps.Map(document.getElementById('map'), myOptions);
         for(var i in markers) {
-					var div = document.createElement('button');
-					div.className = 'btnTweet';
-					div.onclick = (function() {
-						console.log(markers[i].getPosition().lat());
-						map.setCenter(new google.maps.LatLng(markers[i].getPosition().lat(),markers[i].getPosition().lng()));
-						// map.setCenter({
-						// 	lat : markers[i].getPosition().lat(),
-						// 	lng : markers[i].getPosition().lng()
-						// });
-							console.log(markers[i].getPosition().lat());
-					});
-					div.innerHTML = i + ": "+ markers[i].getPosition().lat() + ' ' + markers[i].getPosition().lng();
-					document.getElementById('side').appendChild(div);
+					// var div = document.createElement('button');
+					// div.className = 'btnTweet';
+					// div.onclick = (function() {
+					// 	console.log(markers[i].getPosition().lat());
+					// 	map.setCenter(new google.maps.LatLng(markers[i].getPosition().lat(),markers[i].getPosition().lng()));
+					// 	// map.setCenter({
+					// 	// 	lat : markers[i].getPosition().lat(),
+					// 	// 	lng : markers[i].getPosition().lng()
+					// 	// });
+					// 		console.log(markers[i].getPosition().lat());
+					// });
+					// div.innerHTML = i + ": "+ markers[i].getPosition().lat() + ' ' + markers[i].getPosition().lng();
+					// document.getElementById('side').appendChild(div);
 			markers[i].setMap(map);
 		}
 		// for(var i in polis) {
@@ -65,7 +65,7 @@ Tweet index
 				},
 				success: function(data, textStatus, xhr) {
 					//data = JSON.parse(data);
-					console.log(data);
+					// console.log(data);
 					var puntos = [];
 					var markers = [];
 					var polis = [];
@@ -73,9 +73,9 @@ Tweet index
 							if(JSON.parse(data[key]).place != null) {
 								var lats = [];
 								var coords = JSON.parse(data[key]).place.bounding_box.coordinates[0];
-								console.log(JSON.parse(data[key]));
+								// console.log(JSON.parse(data[key]));
 								for(var i in coords) {
-									console.log(coords[i][0]+","+coords[i][1]);
+									// console.log(coords[i][0]+","+coords[i][1]);
 									var latLng = new google.maps.LatLng(coords[i][1],coords[i][0]);
 									lats.push(latLng);
 								}

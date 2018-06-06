@@ -28,12 +28,19 @@ window.getMarker = (coords, name) ->
     while i < coords.length
       bounds.extend coords[i]
       i++
-  infowindow = new (google.maps.InfoWindow)(content: name)  
+  infowindow = new (google.maps.InfoWindow)(content: name)
   marker = new (google.maps.Marker)(
     position: bounds.getCenter())
   marker.addListener 'click', ->
     infowindow.open marker.getMap(), marker
     return
+  div = document.createElement('button')
+  div.className = 'btnTweet'
+  div.onclick = ->
+    marker.getMap().setCenter new (google.maps.LatLng)(marker.getPosition().lat(), marker.getPosition().lng())
+    return
+  div.innerHTML = name
+  document.getElementById('side').appendChild div
   marker
 
 window.getUrlParameter = (sParam) ->
@@ -48,4 +55,3 @@ window.getUrlParameter = (sParam) ->
       return if sParameterName[1] == undefined then true else sParameterName[1]
     i++
   return
-
