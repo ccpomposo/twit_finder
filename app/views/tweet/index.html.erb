@@ -1,12 +1,14 @@
 Tweet index
-<!-- <% @array.each do |t|%> 
+<!-- <% @array.each do |t|%>
 	<p><%= t%></p>
 <%end%> -->
 <div id="map" style="width: 100%; height:400px;"></div>
+<div id="side">
+</div>
 <script type="text/javascript" charset="utf-8">
 	function initMap(markers, puntos, polis) {
         var bounds, i, j, map, myOptions, poli, styledMap, styles;
-        
+
         bounds = new google.maps.LatLngBounds;
         i = 0;
         while (i < puntos.length) {
@@ -29,6 +31,19 @@ Tweet index
         };
         map = new google.maps.Map(document.getElementById('map'), myOptions);
         for(var i in markers) {
+					var div = document.createElement('button');
+					div.className = 'btnTweet';
+					div.onclick = (function() {
+						console.log(markers[i].getPosition().lat());
+						map.setCenter(new google.maps.LatLng(markers[i].getPosition().lat(),markers[i].getPosition().lng()));
+						// map.setCenter({
+						// 	lat : markers[i].getPosition().lat(),
+						// 	lng : markers[i].getPosition().lng()
+						// });
+							console.log(markers[i].getPosition().lat());
+					});
+					div.innerHTML = i + ": "+ markers[i].getPosition().lat() + ' ' + markers[i].getPosition().lng();
+					document.getElementById('side').appendChild(div);
 			markers[i].setMap(map);
 		}
 		// for(var i in polis) {
@@ -55,25 +70,42 @@ Tweet index
 					var markers = [];
 					var polis = [];
 						for(var key in data) {
-							var lats = [];
-							var coords = JSON.parse(data[key]).place.bounding_box.coordinates[0];
-							console.log(JSON.parse(data[key]));
-							for(var i in coords) {
-								console.log(coords[i][0]+","+coords[i][1]);
-								var latLng = new google.maps.LatLng(coords[i][1],coords[i][0]);
-								lats.push(latLng);
+							if(JSON.parse(data[key]).place != null) {
+								var lats = [];
+								var coords = JSON.parse(data[key]).place.bounding_box.coordinates[0];
+								console.log(JSON.parse(data[key]));
+								for(var i in coords) {
+									console.log(coords[i][0]+","+coords[i][1]);
+									var latLng = new google.maps.LatLng(coords[i][1],coords[i][0]);
+									lats.push(latLng);
+								}
+								var marker = getMarker(lats,JSON.parse(data[key]).user.name+" dice: "+JSON.parse(data[key]).text);
+
+								// var div = document.createElement('button');
+		            // div.className = 'btnTweet';
+								// div.onclick = (function() {
+								// 	console.log("aksjhsdifhailjf");
+								// 	map.setCenter({
+								// 		lat : marker.getPosition().lat(),
+								// 		lng : marker.getPosition().lng()
+								// 	});
+								//
+								// });
+		            // div.innerHTML = JSON.parse(data[key]).user.name+" dice: "+JSON.parse(data[key]).text + '<br>';
+
+		            // document.getElementById('side').appendChild(div);
+
+								polis.push(new google.maps.Polygon({
+									paths: lats,
+									strokeColor: '#000000',
+									strokeOpacity: 1,
+									strokeWeight: 2,
+									fillColor: "#CCCCCC",
+									fillOpacity: 0.4
+								}));
+								markers.push(marker);
+								puntos.push(marker.getPosition());
 							}
-							var marker = getMarker(lats,JSON.parse(data[key]).user.name+" dice: "+JSON.parse(data[key]).text);
-							polis.push(new google.maps.Polygon({
-								paths: lats,
-								strokeColor: '#000000',
-								strokeOpacity: 1,
-								strokeWeight: 2,
-								fillColor: "#CCCCCC",
-								fillOpacity: 0.4
-							}));
-							markers.push(marker);
-							puntos.push(marker.getPosition());
 						}
 					initMap(markers,puntos, polis)
 				},
