@@ -1,10 +1,42 @@
-Tweet index
-<!-- <% @array.each do |t|%>
-	<p><%= t%></p>
-<%end%> -->
-<div id="map" style="width: 100%; height:400px;"></div>
-<div id="side">
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		body {
+			background-image: url(/assets/fondo2.jpg);
+			font-family: Gotham Narrow;
+		}
+		h3, h4 {
+			color: white;
+		}
+
+		.rigth {
+			float: right;
+			width: 300px;
+		}
+
+		.left {
+			float: left;
+			align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+<center>
+	<h3> Resultados </h3>
+</center>
+
+<div id="map" class="left" style="width: 75%; height:600px;"></div>
+<div id="side" class="rigth">
+	<h4> Lista de Tweets </h4>
 </div>
+
+
+</body>
+</html>
+
 <script type="text/javascript" charset="utf-8">
 	function initMap(markers, puntos, polis) {
         var bounds, i, j, map, myOptions, poli, styledMap, styles;
@@ -24,7 +56,7 @@ Tweet index
             name: 'Sin carreteras'
         });
         myOptions = {
-            zoom: 3,
+            zoom: 10,
             center: bounds.getCenter(),
             disableDefaultUI: false,
             mapTypeControl: false

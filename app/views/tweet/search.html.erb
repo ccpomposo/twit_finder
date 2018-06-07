@@ -1,5 +1,40 @@
-<form action="tweet/index" method="get">
-	<legend>Buscar tweets</legend>
-	<input type="text" name="search" id="busqueda">
-	<input type="submit" value="buscar" id="btnBuscar">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="image/png" href="/assets/images/twitter.png">
+	<!-- <link href="/stylesheets/Gotham Narrow Bold Italic.otf" > -->
+
+	<style>
+		body {
+			background-image: url(/assets/fondo.png);
+			font-family: Gotham Narrow;
+		}
+
+		::-webkit-input-placeholder{
+			text-align: center;
+			padding: inherit;
+		}
+
+		@@font-face {
+			font-family: Gotham Narrow;
+			src: url('assets/stylesheets/Gotham Narrow Bold Italic.otf');
+		}
+
+		form {
+			position: absolute;
+			top: 43%;
+			left: 63%;
+		}
+	</style>
+</head>
+<body>
+
+	<form action="tweet/index" method="get">
+		<!-- <legend>Buscar tweets</legend> -->
+		<input type="text" name="search" id="busqueda" placeholder="Buscar" style="width:200px;height:20px;font-family: Gortham Narrow;font-size:12pt">
+		<input type="submit" value="Buscar" id="btnBuscar"
+			style="font-family: Gortham Narrow;font-size:12pt;border: #00aced 0.5px solid; border-radius: 10px; background-color: white">
+	</form>
+
+</body>
+</html>
